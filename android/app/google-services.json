@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "696560524448",
+    "project_id": "rmk-wedding-invidatiton",
+    "storage_bucket": "rmk-wedding-invidatiton.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:696560524448:android:99ebf3b42f06922c5cbdc5",
+        "android_client_info": {
+          "package_name": "com.rmk.wedding_invidatiton"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8f93mFZxb9GoMNwJjw15WOCVg_ANdsv4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
