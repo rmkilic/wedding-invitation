@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wedding_invidatiton/core/widgets/app_loading.dart';
 import 'package:wedding_invidatiton/features/invitation/presentation/widgets/sections/countdown_section.dart';
 import 'package:wedding_invidatiton/features/invitation/presentation/widgets/sections/hero_sections.dart';
 import 'package:wedding_invidatiton/features/invitation/presentation/widgets/sections/location_section.dart';
@@ -19,9 +20,7 @@ class InvitationPage extends StatelessWidget {
         builder: (context, state) {
 
           if (state is InvitationLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return AppLoading();
           }
 
           if (state is InvitationError) {
