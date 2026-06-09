@@ -9,7 +9,8 @@ class AppLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Lottie.asset(
-        Assets.animations.anWeddingRing.path,
+        'assets/animations/an_groom.json'
+       // Assets.animations.anWeddingRing.path,
       ),
     );
   }
