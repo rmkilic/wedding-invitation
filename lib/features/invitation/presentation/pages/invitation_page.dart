@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wedding_invidatiton/core/gen/assets.gen.dart';
 import 'package:wedding_invidatiton/core/theme/app_theme.dart';
-import 'package:wedding_invidatiton/core/widgets/app_loading.dart';
+import 'package:wedding_invidatiton/features/invitation/presentation/pages/background.dart';
 import 'package:wedding_invidatiton/features/invitation/presentation/widgets/sections/countdown_section.dart';
 import 'package:wedding_invidatiton/features/invitation/presentation/widgets/sections/footer_section.dart';
 import 'package:wedding_invidatiton/features/invitation/presentation/widgets/sections/hero_sections.dart';
@@ -45,7 +45,7 @@ class _InvitationPageState extends State<InvitationPage> {
       body: BlocBuilder<InvitationBloc, InvitationState>(
         builder: (context, state) {
           if (state is InvitationLoading || state is InvitationInitial) {
-            return _LoadingView();
+            return LoadingView();
           }
 
           if (state is InvitationError) {
@@ -53,36 +53,44 @@ class _InvitationPageState extends State<InvitationPage> {
           }
 
           if (state is InvitationLoaded) {
-            return AppLoading();
+        
             final invitation = state.invitation;
-            return CustomScrollView(
-              controller: _scrollController,
-              physics: const BouncingScrollPhysics(),
-              slivers: [
-                SliverToBoxAdapter(
-                  child: HeroSection(
-                    invitation: invitation,
-                    hennaOrganization: invitation.organizations.first,
-                    weddingOrganization: invitation.organizations.last,
-                    scrollController: _scrollController,
+            final hennaOrg = invitation.organizations['henna'];
+            final weddingOrg = invitation.organizations['wedding'];
+            
+            return Background(
+              child: CustomScrollView(
+                controller: _scrollController,
+                physics: const BouncingScrollPhysics(),
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: HeroSection(
+                      invitation: invitation,
+                      hennaOrganization: hennaOrg,
+                      weddingOrganization: weddingOrg,
+                      scrollController: _scrollController,
+                    ),
                   ),
-                ),
-                const SliverToBoxAdapter(child: MessageSection()),
-                SliverToBoxAdapter(
-                  child: CountdownSection(
-                    weddingDate: invitation.organizations.last.date,
+                  SliverToBoxAdapter(
+                    child: MessageSection(message: invitation.message, brideFamily: invitation.family.bride, groomFamily: invitation.family.groom,),
                   ),
-                ),
-                SliverToBoxAdapter(
-                  child: LocationSection(organizations: invitation.organizations),
-                ),
-                SliverToBoxAdapter(
-                  child: FooterSection(
-                    brideName: invitation.brideName,
-                    groomName: invitation.groomName,
+                  SliverToBoxAdapter(
+                    child: CountdownSection(
+                      weddingDate: weddingOrg?.date ?? DateTime.now(),
+                    ),
                   ),
-                ),
-              ],
+                  SliverToBoxAdapter(
+                    child: LocationSection(organizations: invitation.organizations),
+                  ),
+                  SliverToBoxAdapter(
+                    child: FooterSection(
+                      brideName: invitation.brideName,
+                      groomName: invitation.groomName,
+                      weddingDate: invitation.organizations['wedding']!.date,
+                    ),
+                  ),
+                ],
+              ),
             );
           }
 
@@ -93,29 +101,15 @@ class _InvitationPageState extends State<InvitationPage> {
   }
 }
 
-class _LoadingView extends StatelessWidget {
+class LoadingView extends StatelessWidget {
+  final double width;
+  final double height;
+
+  const LoadingView({this.width= 160, this.height= 160, super.key});
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppColors.darkSection,
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Assets.animations.anWeddingRing.lottie(width: 160, height: 160),
-            const SizedBox(height: 24),
-            const Text(
-              'Yükleniyor...',
-              style: TextStyle(
-                color: AppColors.goldLight,
-                fontSize: 13,
-                letterSpacing: 3,
-                fontWeight: FontWeight.w300,
-              ),
-            ),
-          ],
-        ),
-      ),
+    return Center(
+      child: Assets.animations.anWeddingRing.lottie(width: width, height: height),
     );
   }
 }

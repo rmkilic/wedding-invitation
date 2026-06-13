@@ -20,10 +20,9 @@ class EventOrganizationModel
       title: map['title'] ?? '',
       hallName: map['hallName'] ?? '',
       address: map['address'] ?? '',
-      latitude: map['latitude'] ?? 0,
-      longitude: map['longitude'] ?? 0,
-      date: DateTime.parse(map['date'] ?? DateTime.now())
-
+      latitude: (map['latitude'] as num?)?.toDouble() ?? 0.0,
+      longitude: (map['longitude'] as num?)?.toDouble() ?? 0.0,
+      date: map['date'] is String ? DateTime.parse(map['date']) : map['date'] ?? DateTime.now(),
     );
   }
 

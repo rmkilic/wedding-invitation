@@ -6,6 +6,7 @@ abstract final class AppColors {
   static const gold = Color(0xFFC9A96E);
   static const goldLight = Color(0xFFEAD9B5);
   static const goldDark = Color(0xFF9E7B4A);
+  static const gold2 = Color(0xFFD4AF37);
   static const deepRose = Color(0xFF8B4B6B);
   static const charcoal = Color(0xFF3A3028);
   static const mutedBrown = Color(0xFF7A6B5D);

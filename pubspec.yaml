@@ -34,8 +34,9 @@ dependencies:
   #local db
   hive_ce_flutter: ^2.3.4
 
-  #animation
+  #ui
   lottie: ^3.3.3
+  google_fonts: ^8.1.0
 
 
   go_router: ^17.2.3
@@ -58,6 +59,8 @@ flutter:
   
   assets:
     - assets/animations/
+    - assets/images/
+
 
 flutter_gen:
   output: lib/core/gen/

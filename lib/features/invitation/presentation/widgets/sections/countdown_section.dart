@@ -40,7 +40,6 @@ class _CountdownSectionState extends State<CountdownSection> {
     final days = _remaining.inDays;
     final hours = _remaining.inHours.remainder(24);
     final minutes = _remaining.inMinutes.remainder(60);
-    final seconds = _remaining.inSeconds.remainder(60);
 
     return Container(
       width: double.infinity,
@@ -96,12 +95,7 @@ class _CountdownSectionState extends State<CountdownSection> {
                   label: 'DAKİKA',
                   delay: const Duration(milliseconds: 240),
                 ),
-                _Separator(),
-                _CountdownCard(
-                  value: seconds,
-                  label: 'SANİYE',
-                  delay: const Duration(milliseconds: 360),
-                ),
+              
               ],
             ),
 
@@ -181,7 +175,7 @@ class _CountdownCardState extends State<_CountdownCard>
         ),
       ),
       child: Container(
-        width: 72,
+        width: 80,
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 8),
         decoration: BoxDecoration(
           border: Border.all(color: AppColors.goldDark.withValues(alpha: 0.3), width: 0.8),

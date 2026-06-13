@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:wedding_invidatiton/core/extensions/datetime_extensions.dart';
 import 'package:wedding_invidatiton/core/theme/app_theme.dart';
 import 'package:wedding_invidatiton/features/invitation/presentation/widgets/common/animated_reveal.dart';
 
 class FooterSection extends StatelessWidget {
   final String brideName;
   final String groomName;
+  final DateTime weddingDate;
 
   const FooterSection({
     super.key,
     required this.brideName,
     required this.groomName,
+    required this.weddingDate
   });
 
   @override
@@ -28,7 +32,7 @@ class FooterSection extends StatelessWidget {
                 const SizedBox(width: 12),
                 Text(
                   '♥',
-                  style: TextStyle(color: AppColors.deepRose, fontSize: 14),
+                  style: TextStyle(color: AppColors.goldLight, fontSize: 14),
                 ),
                 const SizedBox(width: 12),
                 Container(width: 20, height: 0.6, color: AppColors.goldDark),
@@ -40,15 +44,13 @@ class FooterSection extends StatelessWidget {
             RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
-                style: AppTextStyles.footerName.copyWith(color: Colors.white),
+                style: GoogleFonts.greatVibes(color: AppColors.goldLight, fontSize: 24),
                 children: [
                   TextSpan(text: brideName),
                   TextSpan(
                     text: '  &  ',
-                    style: AppTextStyles.footerName.copyWith(
-                      color: AppColors.goldLight,
-                      fontSize: 20,
-                    ),
+                    style: GoogleFonts.greatVibes(color: AppColors.goldLight, fontSize: 18),
+
                   ),
                   TextSpan(text: groomName),
                 ],
@@ -58,7 +60,7 @@ class FooterSection extends StatelessWidget {
             const SizedBox(height: 16),
 
             Text(
-              '27 . 07 . 2026',
+              weddingDate.invitationDate,
               style: const TextStyle(
                 color: AppColors.goldLight,
                 fontSize: 12,
@@ -78,9 +80,9 @@ class FooterSection extends StatelessWidget {
             const SizedBox(height: 20),
 
             Text(
-              'Tüm sevdiklerinizle birlikte\ngelmekten onur duyarız.',
-              style: const TextStyle(
-                color: AppColors.mutedBrown,
+              'Tüm sevdiklerimizle \n birlikte...',
+              style: TextStyle(
+                color: AppColors.gold.withValues(alpha: .6),
                 fontSize: 12,
                 letterSpacing: 0.5,
                 height: 1.8,

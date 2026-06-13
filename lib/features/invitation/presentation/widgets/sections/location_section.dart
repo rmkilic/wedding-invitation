@@ -4,10 +4,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:wedding_invidatiton/core/theme/app_theme.dart';
 import 'package:wedding_invidatiton/features/invitation/domain/entities/event_organization_entity.dart';
 import 'package:wedding_invidatiton/features/invitation/presentation/widgets/common/animated_reveal.dart';
-import 'package:wedding_invidatiton/features/invitation/presentation/widgets/common/ornament_divider.dart';
 
 class LocationSection extends StatelessWidget {
-  final List<EventOrganizationEntity> organizations;
+  final Map<String, EventOrganizationEntity> organizations;
 
   const LocationSection({super.key, required this.organizations});
 
@@ -15,17 +14,13 @@ class LocationSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: AppColors.warmCream,
       padding: const EdgeInsets.symmetric(vertical: 72, horizontal: 24),
       child: Column(
         children: [
-          AnimatedReveal(
-            child: SectionHeader(title: 'Organizasyonlar'),
-          ),
           const SizedBox(height: 48),
-          ...organizations.asMap().entries.map(
+          ...organizations.entries.map(
             (entry) => AnimatedReveal(
-              delay: Duration(milliseconds: entry.key * 150),
+              delay: Duration(milliseconds: organizations.keys.toList().indexOf(entry.key) * 150),
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: _OrganizationCard(organization: entry.value),
