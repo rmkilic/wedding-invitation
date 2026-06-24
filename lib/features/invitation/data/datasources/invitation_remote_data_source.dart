@@ -8,22 +8,20 @@ abstract class InvitationRemoteDataSource {
   Future<InvitationModel> getInvitation();
 }
 
-class InvitationRemoteDataSourceImpl
-    implements InvitationRemoteDataSource {
-      final FirebaseRemoteConfigService  remoteConfig;
+class InvitationRemoteDataSourceImpl implements InvitationRemoteDataSource {
+  final FirebaseRemoteConfigService remoteConfig;
 
   InvitationRemoteDataSourceImpl(this.remoteConfig);
-  
+
   @override
   Future<InvitationModel> getInvitation() async {
-    try{
-       await remoteConfig.fetchAndActivate();
+    try {
+      await remoteConfig.fetchAndActivate();
       final jsonString = remoteConfig.getString('invidatiton_data');
       final map = jsonDecode(jsonString);
       return InvitationModel.fromMap(map);
-    }catch (e){
+    } catch (e) {
       throw RemoteConfigException();
     }
   }
-
 }

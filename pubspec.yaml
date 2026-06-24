@@ -60,7 +60,12 @@ flutter:
   assets:
     - assets/animations/
     - assets/images/
+    - assets/fonts/
 
+  fonts:
+    - family: GreatVibes
+      fonts:
+        - asset: assets/fonts/GreatVibes-Regular.ttf
 
 flutter_gen:
   output: lib/core/gen/

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:wedding_invidatiton/core/theme/app_theme.dart';
+import 'package:wedding_invidatiton/core/extensions/context_extensions.dart';
+import 'package:wedding_invidatiton/core/theme/app_colors.dart';
 import 'package:wedding_invidatiton/features/invitation/domain/entities/event_organization_entity.dart';
 import 'package:wedding_invidatiton/features/invitation/presentation/widgets/common/animated_reveal.dart';
 
@@ -152,7 +153,7 @@ class _DetailRow extends StatelessWidget {
         Icon(icon, size: 16, color: AppColors.gold),
         const SizedBox(width: 12),
         Expanded(
-          child: Text(text, style: AppTextStyles.eventDetail),
+          child: Text(text, style: context.textTheme.bodyMedium),
         ),
       ],
     );

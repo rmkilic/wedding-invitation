@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wedding_invidatiton/core/theme/app_theme.dart';
+import 'package:wedding_invidatiton/core/theme/app_colors.dart';
 
 class OrnamentDivider extends StatelessWidget {
   final Color color;
@@ -31,32 +31,4 @@ class OrnamentDivider extends StatelessWidget {
   Widget _line() => Container(width: lineWidth, height: 0.8, color: color);
 }
 
-class SectionHeader extends StatelessWidget {
-  final String title;
-  final TextStyle? titleStyle;
-  final Color ornamentColor;
 
-  const SectionHeader({
-    super.key,
-    required this.title,
-    this.titleStyle,
-    this.ornamentColor = AppColors.gold,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        OrnamentDivider(color: ornamentColor),
-        const SizedBox(height: 20),
-        Text(
-          title.toUpperCase(),
-          style: titleStyle ?? AppTextStyles.sectionTitle,
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 20),
-        OrnamentDivider(color: ornamentColor),
-      ],
-    );
-  }
-}

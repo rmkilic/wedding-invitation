@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:wedding_invidatiton/core/extensions/context_extensions.dart';
 import 'package:wedding_invidatiton/core/extensions/datetime_extensions.dart';
-import 'package:wedding_invidatiton/core/theme/app_theme.dart';
+import 'package:wedding_invidatiton/core/theme/app_colors.dart';
 import 'package:wedding_invidatiton/features/invitation/domain/entities/event_organization_entity.dart';
 import 'package:wedding_invidatiton/features/invitation/domain/entities/invitation_entity.dart';
-import 'package:wedding_invidatiton/features/invitation/presentation/pages/viewport_fade.dart';
+import 'package:wedding_invidatiton/features/invitation/presentation/widgets/common/decorative_divider.dart';
+import 'package:wedding_invidatiton/features/invitation/presentation/widgets/common/decorative_text.dart';
+import 'package:wedding_invidatiton/features/invitation/presentation/widgets/common/viewport_fade.dart';
 
 class HeroSection extends StatefulWidget {
   final InvitationEntity invitation;
@@ -25,47 +26,58 @@ class HeroSection extends StatefulWidget {
   State<HeroSection> createState() => _HeroSectionState();
 }
 
-class _HeroSectionState extends State<HeroSection>
-    with TickerProviderStateMixin {
+class _HeroSectionState extends State<HeroSection>{
 
-  late final AnimationController _pulseController;
-
-
-  late final Animation<double> _indicatorBounce;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _pulseController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1600),
-    )..repeat(reverse: true);
-    _indicatorBounce = Tween<double>(begin: 0, end: 10).animate(
-      CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
-    );
-
-
-  }
-
-  @override
-  void dispose() {
-    _pulseController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-
     return SizedBox(
-      height: height,
+      height: context.screenHeight,
       child: Stack(
         fit: StackFit.expand,
-        children: [
-         
-          // Dark gradient overlay
-          const DecoratedBox(
+        children: [  
+          const _DarkGradient(),
+          SafeArea(child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              ViewportFade(scrollController: widget.scrollController,
+                child: DecorativeText(text: widget.invitation.brideName,)),             
+              ViewportFade(scrollController: widget.scrollController,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: DecorativeText(text: '&', size: 30,),
+                )),        
+              ViewportFade(scrollController: widget.scrollController,
+                child: DecorativeText(text: widget.invitation.groomName)),
+              ViewportFade(scrollController: widget.scrollController, 
+                child: DecorativeDivider(filled: false, )),
+              ViewportFade(scrollController: widget.scrollController,
+                child: Text(widget.weddingOrganization?.date.invitationDate ?? '', style: context.textTheme.titleLarge,)),
+              const SizedBox(height: 5.0,),
+              ViewportFade(scrollController: widget.scrollController,   
+                child: Text(widget.weddingOrganization?.date.invitationDay ?? '', style: context.textTheme.titleLarge,))
+            ],
+          )),
+          // Scroll down indicator
+          Positioned(
+            bottom: 36,
+            left: 0,
+            right: 0,
+            child: _BottomAnimation() 
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DarkGradient extends StatelessWidget {
+  const _DarkGradient();
+
+  @override
+  Widget build(BuildContext context) {
+    return const DecoratedBox(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
@@ -78,33 +90,43 @@ class _HeroSectionState extends State<HeroSection>
                 stops: [0.0, 0.5, 1.0],
               ),
             ),
-          ),
-          SafeArea(child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              ViewportFade(scrollController: widget.scrollController,
-              child: DecorativeText(text: widget.invitation.brideName,)),
-              ViewportFade(scrollController: widget.scrollController,
-              child: DecorativeText(text: '&', size: 30,)),
-              ViewportFade(scrollController: widget.scrollController,
-              child: DecorativeText(text: widget.invitation.groomName)),
-              ViewportFade(scrollController: widget.scrollController,
-              child: DecorativeDivider()),
-                            ViewportFade(scrollController: widget.scrollController,
+          );
+  }
+}
 
-                child: Text(widget.weddingOrganization?.date.invitationDate ?? '', style: TextStyle(fontSize: 20),)),
-              ViewportFade(scrollController: widget.scrollController,
-              
-              child: Text(widget.weddingOrganization?.date.invitationDay ?? '', style: TextStyle(fontSize: 20),))
-            ],
-          )),
-          // Scroll down indicator
-          Positioned(
-            bottom: 36,
-            left: 0,
-            right: 0,
-            child: AnimatedBuilder(
+class _BottomAnimation extends StatefulWidget {
+  const _BottomAnimation();
+
+  @override
+  State<_BottomAnimation> createState() => __BottomAnimationState();
+}
+
+class __BottomAnimationState extends State<_BottomAnimation> with TickerProviderStateMixin {
+
+  late final AnimationController _pulseController;
+  late final Animation<double> _indicatorBounce;
+
+  @override
+  void initState() {
+    super.initState();
+    _pulseController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1600),
+    )..repeat(reverse: true);
+    _indicatorBounce = Tween<double>(begin: 0, end: 10).animate(
+      CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
+    );
+
+  }
+
+  @override
+  void dispose() {
+    _pulseController.dispose();
+    super.dispose();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
               animation: _indicatorBounce,
               builder: (context, child) => Transform.translate(
                 offset: Offset(0, _indicatorBounce.value),
@@ -128,53 +150,11 @@ class _HeroSectionState extends State<HeroSection>
                   ),
                 ],
               ),
-            ),
-          ),
-        ],
-      ),
-    );
+            );
   }
 }
 
 
-class DecorativeText extends StatelessWidget {
-  final String text;
-  final double size;
-  const DecorativeText({required this.text, this.size = 82, super.key });
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(text,style: GoogleFonts.greatVibes(fontSize: size),);
-  }
-}
-
-class DecorativeDivider extends StatelessWidget {
-  const DecorativeDivider({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: context.screenWidth *.3
-      ,
-      child: Row(
-        children: [
-          Expanded(
-            child: Divider(
-              height: 10,
-              color: AppColors.goldDark,
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: Text('✧', style: TextStyle(fontSize: 28, color: AppColors.goldDark),)),
-          Expanded( child: Divider(
-              height: 10,
-              color: AppColors.goldDark,
-            ),)
-        ],
-      ),
-    );
-  }
 
 
-}
+

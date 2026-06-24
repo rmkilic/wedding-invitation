@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:wedding_invidatiton/core/theme/app_theme.dart';
+import 'package:wedding_invidatiton/core/extensions/context_extensions.dart';
+import 'package:wedding_invidatiton/core/theme/app_colors.dart';
 import 'package:wedding_invidatiton/features/invitation/presentation/widgets/common/animated_reveal.dart';
 
 class CountdownSection extends StatefulWidget {
@@ -80,19 +81,19 @@ class _CountdownSectionState extends State<CountdownSection> {
               children: [
                 _CountdownCard(
                   value: days,
-                  label: 'GÜN',
+                  label: 'Gün',
                   delay: const Duration(milliseconds: 0),
                 ),
                 _Separator(),
                 _CountdownCard(
                   value: hours,
-                  label: 'SAAT',
+                  label: 'Saat',
                   delay: const Duration(milliseconds: 120),
                 ),
                 _Separator(),
                 _CountdownCard(
                   value: minutes,
-                  label: 'DAKİKA',
+                  label: 'Dk',
                   delay: const Duration(milliseconds: 240),
                 ),
               
@@ -201,16 +202,19 @@ class _CountdownCardState extends State<_CountdownCard>
               child: Text(
                 widget.value.toString().padLeft(2, '0'),
                 key: ValueKey(widget.value),
-                style: AppTextStyles.countdownValue,
+                style: context.textTheme.labelLarge,
               ),
             ),
             const SizedBox(height: 8),
-            Text(widget.label, style: AppTextStyles.countdownLabel),
+            Text(widget.label, style: context.textTheme.labelLarge),
           ],
         ),
       ),
     );
   }
+}
+
+class AppTextStyles {
 }
 
 class _Separator extends StatelessWidget {

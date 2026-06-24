@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wedding_invidatiton/core/extensions/context_extensions.dart';
-import 'package:wedding_invidatiton/core/theme/app_theme.dart';
+import 'package:wedding_invidatiton/core/theme/app_colors.dart';
 import 'package:wedding_invidatiton/features/invitation/domain/entities/family_member_entity.dart';
 import 'package:wedding_invidatiton/features/invitation/presentation/widgets/common/animated_reveal.dart';
 import 'package:wedding_invidatiton/features/invitation/presentation/widgets/common/ornament_divider.dart';
@@ -86,10 +86,7 @@ class MessageSection extends StatelessWidget {
 
             const SizedBox(height: 40),
             OrnamentDivider(color: AppColors.goldDark),
-
-            FamilyArea(brideFamily: brideFamily, groomFamily: groomFamily,)
-
-           
+            FamilyArea(brideFamily: brideFamily, groomFamily: groomFamily),
           ],
         ),
       ),

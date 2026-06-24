@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Fades + slides a child in when first inserted into the widget tree.
-/// Works naturally with lazy-building lists — each item animates as it scrolls into view.
 class AnimatedReveal extends StatefulWidget {
   final Widget child;
   final Duration delay;
@@ -31,9 +29,10 @@ class _AnimatedRevealState extends State<AnimatedReveal>
     super.initState();
     _controller = AnimationController(vsync: this, duration: widget.duration);
     _opacity = CurvedAnimation(parent: _controller, curve: Curves.easeOut);
-    _slide = Tween<double>(begin: widget.slideDistance, end: 0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic),
-    );
+    _slide = Tween<double>(
+      begin: widget.slideDistance,
+      end: 0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic));
     Future.delayed(widget.delay, () {
       if (mounted) _controller.forward();
     });

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wedding_invidatiton/core/extensions/datetime_extensions.dart';
-import 'package:wedding_invidatiton/core/theme/app_theme.dart';
+import 'package:wedding_invidatiton/core/theme/app_colors.dart';
 import 'package:wedding_invidatiton/features/invitation/presentation/widgets/common/animated_reveal.dart';
 
 class FooterSection extends StatelessWidget {

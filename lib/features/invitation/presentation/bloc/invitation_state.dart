@@ -18,7 +18,7 @@ class InvitationLoaded extends InvitationState{
   const InvitationLoaded(this.invitation);
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [invitation];
 }
 
 class InvitationError extends InvitationState{
