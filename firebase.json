@@ -1,1 +1,37 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"rmk-wedding-invidatiton","appId":"1:696560524448:android:99ebf3b42f06922c5cbdc5","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"rmk-wedding-invidatiton","configurations":{"android":"1:696560524448:android:99ebf3b42f06922c5cbdc5","ios":"1:696560524448:ios:a002c4101a177d0d5cbdc5","web":"1:696560524448:web:29c35ad5d41510085cbdc5"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "rmk-wedding-invidatiton",
+          "appId": "1:696560524448:android:99ebf3b42f06922c5cbdc5",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "rmk-wedding-invidatiton",
+          "configurations": {
+            "android": "1:696560524448:android:99ebf3b42f06922c5cbdc5",
+            "ios": "1:696560524448:ios:a002c4101a177d0d5cbdc5",
+            "web": "1:696560524448:web:29c35ad5d41510085cbdc5"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
