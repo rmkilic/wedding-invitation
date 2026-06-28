@@ -214,8 +214,6 @@ class _CountdownCardState extends State<_CountdownCard>
   }
 }
 
-class AppTextStyles {
-}
 
 class _Separator extends StatelessWidget {
   @override

@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'Elif & Mümin | Düğün Davetiyesi',
       theme: AppTheme.light,
       home: BlocProvider(
         create: (_) => createInvitationBloc(),

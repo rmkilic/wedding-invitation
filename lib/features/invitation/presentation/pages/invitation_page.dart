@@ -46,7 +46,7 @@ class _InvitationPageState extends State<InvitationPage> {
       body: BlocBuilder<InvitationBloc, InvitationState>(
         builder: (context, state) {
           if (state is InvitationLoading || state is InvitationInitial) {
-            return AppLoading();
+            return const AppLoading();
           }
 
           if (state is InvitationError) {
